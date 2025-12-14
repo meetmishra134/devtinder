@@ -3,6 +3,7 @@ import RequestsCard from "./RequestsCard";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addRequests, removeRequest } from "../utils/requestsSlice";
+import { BASE_URL } from "../utils/constants";
 
 const Requests = () => {
   const dispatch = useDispatch();
@@ -10,7 +11,7 @@ const Requests = () => {
   async function reviewRequest(status, _id) {
     try {
       const res = await axios.post(
-        `http://localhost:7777/request/review/${status}/${_id}`,
+        `${BASE_URL}/request/review/${status}/${_id}`,
         {},
         { withCredentials: true },
       );
@@ -23,10 +24,9 @@ const Requests = () => {
 
   async function fetchRequests() {
     try {
-      const res = await axios.get(
-        "http://localhost:7777/user/requests/received",
-        { withCredentials: true },
-      );
+      const res = await axios.get(`${BASE_URL}/user/requests/received`, {
+        withCredentials: true,
+      });
       console.log(res.data.data);
       dispatch(addRequests(res.data.data));
     } catch (error) {

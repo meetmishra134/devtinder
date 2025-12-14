@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { BASE_URL } from "../utils/constants";
 const EditProfile = () => {
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
@@ -11,11 +12,9 @@ const EditProfile = () => {
   async function onSubmit(data) {
     // console.log(data);
     try {
-      const res = await axios.patch(
-        "http://localhost:7777/profile/edit",
-        data,
-        { withCredentials: true },
-      );
+      const res = await axios.patch(`${BASE_URL}/profile/edit`, data, {
+        withCredentials: true,
+      });
       console.log(res.data.data);
       dispatch(addUser(res.data.data));
     } catch (error) {

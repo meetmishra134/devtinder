@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { BASE_URL } from "../utils/constants";
 const Login = () => {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
@@ -11,7 +12,7 @@ const Login = () => {
   const [error, setError] = useState("");
   async function onSubmit(data) {
     try {
-      const res = await axios.post("http://localhost:7777/login", data, {
+      const res = await axios.post(`${BASE_URL}/login`, data, {
         withCredentials: true,
       });
       console.log(res);
