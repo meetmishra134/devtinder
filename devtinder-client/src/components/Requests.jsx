@@ -38,7 +38,7 @@ const Requests = () => {
   }, []);
   return (
     <div className="flex items-center justify-center gap-10 p-6">
-      {requests.length !== 0 ? (
+      {requests && requests.length !== 0 ? (
         requests.map((request) => (
           <RequestsCard
             key={request._id}
